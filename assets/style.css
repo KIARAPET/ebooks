@@ -5,7 +5,7 @@ body{--grad:linear-gradient(100deg,var(--c2),var(--c3));margin:0;font-family:"DM
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 h1,h2{font-family:Sora,"DM Sans",system-ui,sans-serif;text-wrap:balance;letter-spacing:-.02em}
 h2{font-size:clamp(26px,4.4vw,38px);line-height:1.15;margin:0 0 28px;font-weight:700}
-h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;background:var(--grad);margin-top:14px}
+h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;background:var(--bar,var(--grad));margin-top:14px}
 .topbar{background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);border-bottom:1px solid var(--line);color:var(--muted);text-align:center;font-size:13px;padding:10px 16px;letter-spacing:.04em}
 .hero{position:relative;isolation:isolate;overflow:hidden;padding:64px 0 76px;background:radial-gradient(120% 80% at 80% 0,color-mix(in srgb,var(--c1) 90%,#000),transparent 60%),var(--bg)}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(70% 70% at 70% 30%,#000,transparent);opacity:.5}
@@ -26,7 +26,7 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;backg
 @keyframes shine{60%,100%{left:130%}}
 .trust{list-style:none;display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:24px 0 0;font-size:13px}
 .trust li{padding:7px 14px;border-radius:999px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(8px);color:var(--ink)}
-.trust li::before{content:"✓ ";color:var(--c3);font-weight:700}
+.trust li::before{content:"✓ ";color:var(--c4,var(--c3));font-weight:700}
 .hero-art{display:flex;justify-content:center;position:relative}
 .hero-art::before{content:"";position:absolute;width:75%;aspect-ratio:1;border-radius:50%;background:var(--grad);filter:blur(80px);opacity:.35;top:10%}
 .cover{position:relative;width:min(300px,78%);aspect-ratio:3/4;filter:drop-shadow(0 30px 40px rgba(0,0,0,.6));transform:rotate(3deg);animation:float 6s ease-in-out infinite;transition:transform .2s ease-out;will-change:transform}
@@ -45,7 +45,7 @@ section.wrap,section.band,section.final{padding-block:64px}
 .list.grid{grid-template-columns:repeat(2,1fr)}
 .list li{display:flex;gap:14px;align-items:flex-start;background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:18px;backdrop-filter:blur(10px);transition:transform .25s,border-color .25s,box-shadow .25s}
 .list li:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--c2) 60%,transparent);box-shadow:0 16px 40px -12px color-mix(in srgb,var(--c2) 45%,transparent)}
-.list li svg{flex:none;margin-top:2px;color:var(--c3)}
+.list li svg{flex:none;margin-top:2px;color:var(--c4,var(--c3))}
 .fmt{margin:26px 0 0;padding:22px;border-radius:18px;background:linear-gradient(120deg,color-mix(in srgb,var(--c2) 18%,transparent),color-mix(in srgb,var(--c3) 12%,transparent));border:1px solid var(--line);font-size:18px;text-align:center}
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .tile{margin:0;border-radius:24px;overflow:hidden;background:var(--glass);border:1px solid var(--line);transition:transform .35s,box-shadow .35s,border-color .35s}
@@ -104,3 +104,13 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;paddin
 .line p{margin:0;color:var(--muted);font-size:15px}
 @media (max-width:820px){.lines{grid-template-columns:1fr}}
 .line:last-child:nth-child(3n+1){grid-column:1/-1}
+
+/* Natal: vermelho + verde sobre preto */
+.xmas .topbar{border-top:4px solid;border-image:repeating-linear-gradient(90deg,var(--c2) 0 28px,#fff 28px 36px,var(--c4) 36px 64px,#fff 64px 72px) 1}
+.xmas .o2{background:var(--c4);opacity:.3}
+.xmas .line::before{background:var(--bar)}
+.xmas .list li:hover,.xmas .tile:hover,.xmas .line:hover{border-color:var(--c4)}
+.xmas .final{background:radial-gradient(50% 100% at 25% 0,color-mix(in srgb,var(--c2) 40%,transparent),transparent),radial-gradient(50% 100% at 75% 0,color-mix(in srgb,var(--c4) 32%,transparent),transparent)}
+.xmas .guarantee{background:linear-gradient(var(--bg),var(--bg)) padding-box,linear-gradient(120deg,var(--c2),var(--c4)) border-box}
+.xmas .steps b{background:var(--c4);color:#fff}
+.xmas .seal{background:linear-gradient(135deg,var(--c2),var(--c4))}
