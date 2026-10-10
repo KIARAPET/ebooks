@@ -14,10 +14,28 @@ PRODUCTS = [
   audience=["Quem quer uma renda extra no fim de ano","Quem quer surpreender a família na ceia","Quem já vende doces e quer ampliar o cardápio"]),
  dict(slug="brigadeiros-gourmet", art="brigadeiros", c1="#2a0a3a", c2="#ff4fa3", c3="#ffb86b", snow=False, name="Brigadeiros Gourmets: 40 Receitas para Vender", emoji="🍫",
   checkout="https://pay.hotmart.com/H102991489G", price_from="", price="",
-  headline="40 receitas de <em>Brigadeiros Gourmets</em> para você fazer e vender",
-  sub="Sabores que se destacam, fáceis de fazer e com ótima margem de lucro.",
-  bullets=["40 receitas de brigadeiros gourmets","Sabores sofisticados com ingredientes acessíveis","Passo a passo para iniciantes","Ideal para vender em casa, em encomendas e eventos"],
-  audience=["Quem quer começar a vender doces","Confeiteiras que querem novos sabores","Quem busca renda extra trabalhando de casa"]),
+  headline="Transforme brigadeiros em <em>renda todo mês</em>, direto da sua cozinha",
+  sub="Mais de 40 receitas organizadas em linhas de sabores, como uma confeitaria profissional. Mesmo começando do zero.",
+  bullets=["Mais de 40 receitas de brigadeiros gourmets em 6 linhas de sabores",
+           "Módulo especial de Coxinhas Doces, campeãs de venda nas caixinhas gourmet",
+           "Módulo bônus com ponto, conservação, preço de venda, kits e embalagens",
+           "Trabalhe na sua cozinha, no seu tempo, com sabores que fazem o cliente salivar"],
+  lines=[("Linha Tradicional","Brigadeiro, beijinho, casadinho, churros, sensação, M&M, prestígio e outros clássicos que não podem faltar."),
+         ("Linha Premium","Belga, ferrero/avelã, pistache, nutella, oreo, cappuccino, café e sabores com cara de vitrine chique."),
+         ("Linha Ninho & Recheados","Ninho, ninho brûlée, ninho trufado, ninho com Nutella, ninho com morango e outras combinações super cremosas."),
+         ("Linha Frutas","Maracujá, limão siciliano, laranja, maçã, banoffe, surpresa de uva, bicho de pé e coxinha de brigadeiro com morango."),
+         ("Linha Crocantes & Castanhas","Paçoca, amendoim, milho verde, abóbora, pé de moça, nozes, ovomaltine crocante e muito mais."),
+         ("Linha Adulta (18+)","Brigadeiro de caipirinha e de amarula/licor de café, perfeitos para festas e eventos."),
+         ("Módulo Coxinhas Doces","Coxinha de brigadeiro com morango e coxinha de leite ninho com morango, campeãs de vendas nas caixinhas gourmet.")],
+  final="Comece hoje a montar o seu cardápio de brigadeiros gourmet.",
+  bonus_title="Módulo bônus: aprenda a vender",
+  bonus=["Ponto ideal do brigadeiro para enrolar e vender",
+         "Validade, conservação e congelamento para não perder produto",
+         "Uma forma simples de calcular o preço de venda, sem complicar",
+         "Sugestões prontas de kits com 100 unidades por linha: tradicional, kids, premium, ninho, frutas, crocantes e alcoólicos",
+         "Ideias de apresentação e embalagens para deixar seus doces com cara de loja"],
+  audience=["Quem quer sair do básico e montar um verdadeiro cardápio de confeitaria","Quem quer uma renda todo mês trabalhando em casa, mesmo começando do zero","Quem ama cozinha e quer ouvir: \"meu Deus, que brigadeiro é esse?\""],
+  format="Se você quer aumentar seu cardápio e ouvir seus clientes dizendo “meu Deus, que brigadeiro é esse?” e “essa coxinha de morango é perfeita!”, esse e-book foi feito pra você."),
  dict(slug="guirlandas-natal-lucrativas", art="wreath", c1="#06301f", c2="#2ee59d", c3="#ff5a6e", snow=True, name="Guirlandas de Natal Lucrativas", emoji="🎄",
   checkout="https://pay.hotmart.com/B103367409V", price_from="", price="",
   headline="Guirlandas de Natal <em>lucrativas</em>: faça e venda na época mais forte do ano",
@@ -102,6 +120,14 @@ def page(p):
     faq = "".join(f"<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>" for q,a in FAQ)
     steps = "".join(f'<li><b>{i+1}</b><div><strong>{esc(t)}</strong><span>{esc(d)}</span></div></li>' for i,(t,d) in enumerate(STEPS))
     snow = '<canvas id="snow" aria-hidden="true"></canvas>' if p.get("snow") else ""
+    lines_html = ""
+    if p.get("lines"):
+        cards = "".join(f'<div class="line"><h3>{esc(t)}</h3><p>{esc(d)}</p></div>' for t,d in p["lines"])
+        lines_html = f'<section class="wrap"><h2>Linhas de sabores</h2><div class="lines">{cards}</div></section>'
+    bonus_html = ""
+    if p.get("bonus"):
+        bl = "".join(f'<li>{CHECK}<span>{esc(b)}</span></li>' for b in p["bonus"])
+        bonus_html = f'<section class="wrap"><h2>{esc(p["bonus_title"])}</h2><ul class="list grid">{bl}</ul></section>'
     fmt = f'<p class="fmt">{esc(p["format"])}</p>' if p.get("format") else ""
     price = ""
     if p["price"]:
@@ -148,14 +174,16 @@ fbq('track', 'PageView');
 </div></header>
 <main>
  <section class="wrap"><h2>O que você vai encontrar</h2><ul class="list grid">{lis}</ul>{fmt}</section>
+ {lines_html}
  {gallery(p)}
+ {bonus_html}
  <section class="band"><div class="wrap"><h2>Para quem é</h2><ul class="list">{aud}</ul>
   <a class="cta" href="{p["checkout"]}" data-cta>Quero começar agora</a></div></section>
  <section class="wrap"><h2>Como funciona</h2><ol class="steps">{steps}</ol></section>
  <section class="wrap"><div class="guarantee"><div class="seal">7<small>dias</small></div><div><h2>Garantia incondicional</h2>
   <p>Você tem 7 dias para conferir o material. Se não gostar, é só pedir o reembolso pela Hotmart.</p></div></div></section>
  <section class="wrap narrow"><h2>Perguntas frequentes</h2>{faq}</section>
- <section class="final"><div class="wrap"><h2>Garanta o seu agora</h2><p>Comece hoje e deixe o seu Natal mais doce.</p>
+ <section class="final"><div class="wrap"><h2>Garanta o seu agora</h2><p>{esc(p.get("final","Comece hoje e deixe o seu Natal mais doce."))}</p>
   <a class="cta" href="{p["checkout"]}" data-cta>Quero meu ebook agora</a></div></section>
 </main>
 <footer><div class="wrap"><p>© <span id="y"></span> · {esc(p["name"])}. Produto digital, entrega por e-mail via Hotmart. Os resultados dependem da dedicação de cada pessoa.</p></div></footer>

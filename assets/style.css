@@ -96,3 +96,11 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;paddin
 .gallery.n4 .tile-img{aspect-ratio:4/5}
 .gallery.n4 .tile figcaption{font-size:14px;padding:12px}
 @media (max-width:820px){.gallery.n4{grid-template-columns:1fr 1fr;max-width:none;gap:12px}}
+.lines{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.line{padding:22px;border-radius:20px;background:var(--glass);border:1px solid var(--line);position:relative;overflow:hidden;transition:transform .25s,border-color .25s}
+.line::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--grad)}
+.line:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--c2) 60%,transparent)}
+.line h3{font-family:Sora,sans-serif;font-size:17px;margin:0 0 8px}
+.line p{margin:0;color:var(--muted);font-size:15px}
+@media (max-width:820px){.lines{grid-template-columns:1fr}}
+.line:last-child:nth-child(3n+1){grid-column:1/-1}

@@ -19,7 +19,7 @@
   });
 
   /* ---------- Reveal on scroll ---------- */
-  var els = document.querySelectorAll('section h2, .list li, .steps li, .tile, .guarantee, details, .fmt, .final p, .band .cta');
+  var els = document.querySelectorAll('section h2, .line, .list li, .steps li, .tile, .guarantee, details, .fmt, .final p, .band .cta');
   els.forEach(function (el, i) { el.classList.add('reveal'); el.style.setProperty('--d', (i % 4) * 0.08 + 's'); });
   if ('IntersectionObserver' in window && !reduce) {
     var io = new IntersectionObserver(function (es) {
