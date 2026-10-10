@@ -6,25 +6,25 @@ import os, html
 PIXEL_ID = "SEU_PIXEL_ID_AQUI"  # ID do Pixel da Meta (só números)
 
 PRODUCTS = [
- dict(slug="bolachas-biscoitos-natal", art="cookies", c1="#7a1f2b", c2="#e0a43a", c3="#fdf3e7", name="Bolachas & Biscoitos de Natal", emoji="🍪",
+ dict(slug="bolachas-biscoitos-natal", art="cookies", c1="#3a0a16", c2="#ff4d6d", c3="#ffc46b", snow=True, name="Bolachas & Biscoitos de Natal", emoji="🍪",
   checkout="https://pay.hotmart.com/D103367264X", price_from="", price="",
   headline="Bolachas e Biscoitos de Natal que encantam na ceia e <em>rendem dinheiro</em> na sua cozinha",
   sub="Receitas passo a passo para você fazer, presentear e vender neste Natal.",
   bullets=["Receitas práticas de bolachas e biscoitos natalinos","Passo a passo simples, mesmo para quem está começando","Ideias para montar kits e vender como presente","Aprenda a aproveitar a alta procura da época"],
   audience=["Quem quer uma renda extra no fim de ano","Quem quer surpreender a família na ceia","Quem já vende doces e quer ampliar o cardápio"]),
- dict(slug="brigadeiros-gourmet", art="brigadeiros", c1="#3b1f17", c2="#e58fa5", c3="#fbf0ea", name="Brigadeiros Gourmets: 40 Receitas para Vender", emoji="🍫",
+ dict(slug="brigadeiros-gourmet", art="brigadeiros", c1="#2a0a3a", c2="#ff4fa3", c3="#ffb86b", snow=False, name="Brigadeiros Gourmets: 40 Receitas para Vender", emoji="🍫",
   checkout="https://pay.hotmart.com/H102991489G", price_from="", price="",
   headline="40 receitas de <em>Brigadeiros Gourmets</em> para você fazer e vender",
   sub="Sabores que se destacam, fáceis de fazer e com ótima margem de lucro.",
   bullets=["40 receitas de brigadeiros gourmets","Sabores sofisticados com ingredientes acessíveis","Passo a passo para iniciantes","Ideal para vender em casa, em encomendas e eventos"],
   audience=["Quem quer começar a vender doces","Confeiteiras que querem novos sabores","Quem busca renda extra trabalhando de casa"]),
- dict(slug="guirlandas-natal-lucrativas", art="wreath", c1="#14452f", c2="#d1344a", c3="#eef6ef", name="Guirlandas de Natal Lucrativas", emoji="🎄",
+ dict(slug="guirlandas-natal-lucrativas", art="wreath", c1="#06301f", c2="#2ee59d", c3="#ff5a6e", snow=True, name="Guirlandas de Natal Lucrativas", emoji="🎄",
   checkout="https://pay.hotmart.com/B103367409V", price_from="", price="",
   headline="Guirlandas de Natal <em>lucrativas</em>: faça e venda na época mais forte do ano",
   sub="Aprenda a criar guirlandas lindas que todo mundo quer levar para casa.",
   bullets=["Passo a passo para criar guirlandas de Natal","Ideias para diferentes estilos e públicos","Como transformar a produção em renda extra","Conteúdo prático para começar do zero"],
   audience=["Quem quer lucrar no Natal","Quem gosta de trabalhos manuais e decoração","Quem quer um negócio com baixo investimento"]),
- dict(slug="panettones-chocottones", art="panettone", c1="#5a1830", c2="#e0a43a", c3="#fbf1e4", name="Panettones & Chocottones Trufados", emoji="🍞",
+ dict(slug="panettones-chocottones", art="panettone", c1="#2b0a1f", c2="#ffc46b", c3="#ff6fa0", snow=True, name="Panettones & Chocottones Trufados", emoji="🍞",
   checkout="https://pay.hotmart.com/Q103366986Y", price_from="", price="",
   headline="Panettones e Chocottones <em>fofinhos, trufados</em> e com cara de confeitaria",
   sub="Massa 100% caseira e recheios simples de preparar: para presentear, enfeitar a ceia ou faturar no fim de ano.",
@@ -93,7 +93,7 @@ def gallery(p):
                       if os.path.exists(os.path.join(root,"assets","img",f'{p["slug"]}-{i}.{e}'))), None)
         inner = (f'<img src="{photo}" alt="{esc(label)}" loading="lazy">' if photo else
                  f'<svg viewBox="0 0 200 200" aria-hidden="true" style="transform:rotate({(-6,5,-3)[i-1]}deg) scale({(1,1.08,.96)[i-1]})">{ART[p["art"]]}</svg>')
-        tiles += f'<figure class="tile" style="--bg:{bg}"><div class="tile-img">{inner}</div><figcaption>{esc(label)}</figcaption></figure>'
+        tiles += f'<figure class="tile" style="--bg-t:{bg}"><div class="tile-img">{inner}</div><figcaption>{esc(label)}</figcaption></figure>'
     return f'<section class="wrap"><h2>Uma prévia do que você vai criar</h2><div class="gallery">{tiles}</div></section>'
 
 def page(p):
@@ -101,6 +101,7 @@ def page(p):
     aud = "".join(f'<li>{CHECK}<span>{esc(b)}</span></li>' for b in p["audience"])
     faq = "".join(f"<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>" for q,a in FAQ)
     steps = "".join(f'<li><b>{i+1}</b><div><strong>{esc(t)}</strong><span>{esc(d)}</span></div></li>' for i,(t,d) in enumerate(STEPS))
+    snow = '<canvas id="snow" aria-hidden="true"></canvas>' if p.get("snow") else ""
     fmt = f'<p class="fmt">{esc(p["format"])}</p>' if p.get("format") else ""
     price = ""
     if p["price"]:
@@ -116,7 +117,7 @@ def page(p):
 <meta property="og:title" content="{esc(p["name"])}">
 <meta property="og:description" content="{esc(p["sub"])}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
 <script>document.documentElement.className="js"</script>
 <!-- Meta Pixel Code -->
@@ -134,8 +135,8 @@ fbq('track', 'PageView');
 <script>window.LP={{name:{p["name"]!r},checkout:"{p["checkout"]}",value:0,currency:"BRL"}};</script>
 </head>
 <body style="--c1:{p["c1"]};--c2:{p["c2"]};--c3:{p["c3"]}">
-<div class="topbar">Especial de Natal · Receitas para presentear e vender</div>
-<header class="hero"><canvas id="snow" aria-hidden="true"></canvas><i class="orb o1"></i><i class="orb o2"></i><div class="wrap hero-grid">
+<div class="topbar">{"Especial de Natal · " if p.get("snow") else ""}Receitas para presentear e vender</div>
+<header class="hero">{snow}<i class="orb o1"></i><i class="orb o2"></i><div class="wrap hero-grid">
  <div class="hero-text">
   <h1>{p["headline"]}</h1>
   <p class="sub">{esc(p["sub"])}</p>
