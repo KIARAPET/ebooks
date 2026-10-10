@@ -63,6 +63,12 @@ ART = {
 "panettone": '''<path d="M44 190 V110 C44 52 156 52 156 110 V190Z" fill="#d9a066"/><path d="M50 106 C50 62 150 62 150 106 C130 96 120 112 100 100 C80 112 70 96 50 106Z" fill="#fff" opacity=".95"/><path d="M44 190 V150 H156 V190Z" fill="#a31d33"/><path d="M44 150 H156" stroke="#e0a43a" stroke-width="5"/>
 <g fill="#e0a43a"><circle cx="100" cy="84" r="4"/><circle cx="78" cy="94" r="3"/><circle cx="122" cy="94" r="3"/></g><g fill="#5a1830"><circle cx="70" cy="126" r="4"/><circle cx="104" cy="122" r="4"/><circle cx="130" cy="132" r="4"/></g>''',
 }
+GALLERY = {
+ "panettones-chocottones": [("Chocottone trufado de morango","#f7c6cf"),("Panettone trufado de doce de leite com nozes","#f0c98a"),("Chocottone trufado de Ninho com Nutella","#e9dcc8")],
+ "brigadeiros-gourmet": [("40 receitas","#f2d3c4"),("Sabores gourmet","#e6c3cf"),("Para vender","#ead9bf")],
+ "bolachas-biscoitos-natal": [("Biscoitos natalinos","#f3d9b5"),("Kits para presente","#f1c9c9"),("Venda na época forte","#e5d3b8")],
+ "guirlandas-natal-lucrativas": [("Guirlandas de Natal","#cfe6d4"),("Estilos para cada público","#f3d2d6"),("Renda extra","#dbead9")],
+}
 CHECK = '<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".15"/><path d="M5.5 10.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
 def esc(s): return html.escape(s, quote=True)
@@ -78,6 +84,17 @@ def cover(p, big=True):
 <svg viewBox="0 0 200 200" class="art" aria-hidden="true">{ART[p["art"]]}</svg>
 <strong>{esc(p["name"])}</strong></div></div>
 <img class="real" src="../assets/img/{p["slug"]}.jpg" alt="" onerror="this.remove()"></div>'''
+
+def gallery(p):
+    tiles = ""
+    root = os.path.dirname(os.path.abspath(__file__))
+    for i,(label,bg) in enumerate(GALLERY[p["slug"]], 1):
+        photo = next((f'../assets/img/{p["slug"]}-{i}.{e}' for e in ("jpg","webp","png")
+                      if os.path.exists(os.path.join(root,"assets","img",f'{p["slug"]}-{i}.{e}'))), None)
+        inner = (f'<img src="{photo}" alt="{esc(label)}" loading="lazy">' if photo else
+                 f'<svg viewBox="0 0 200 200" aria-hidden="true" style="transform:rotate({(-6,5,-3)[i-1]}deg) scale({(1,1.08,.96)[i-1]})">{ART[p["art"]]}</svg>')
+        tiles += f'<figure class="tile" style="--bg:{bg}"><div class="tile-img">{inner}</div><figcaption>{esc(label)}</figcaption></figure>'
+    return f'<section class="wrap"><h2>Uma prévia do que você vai criar</h2><div class="gallery">{tiles}</div></section>'
 
 def page(p):
     lis = "".join(f'<li>{CHECK}<span>{esc(b)}</span></li>' for b in p["bullets"])
@@ -101,6 +118,7 @@ def page(p):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
+<script>document.documentElement.className="js"</script>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s){{if(f.fbq)return;n=f.fbq=function(){{n.callMethod?
@@ -117,7 +135,7 @@ fbq('track', 'PageView');
 </head>
 <body style="--c1:{p["c1"]};--c2:{p["c2"]};--c3:{p["c3"]}">
 <div class="topbar">Especial de Natal · Receitas para presentear e vender</div>
-<header class="hero"><div class="wrap hero-grid">
+<header class="hero"><canvas id="snow" aria-hidden="true"></canvas><i class="orb o1"></i><i class="orb o2"></i><div class="wrap hero-grid">
  <div class="hero-text">
   <h1>{p["headline"]}</h1>
   <p class="sub">{esc(p["sub"])}</p>
@@ -129,6 +147,7 @@ fbq('track', 'PageView');
 </div></header>
 <main>
  <section class="wrap"><h2>O que você vai encontrar</h2><ul class="list grid">{lis}</ul>{fmt}</section>
+ {gallery(p)}
  <section class="band"><div class="wrap"><h2>Para quem é</h2><ul class="list">{aud}</ul>
   <a class="cta" href="{p["checkout"]}" data-cta>Quero começar agora</a></div></section>
  <section class="wrap"><h2>Como funciona</h2><ol class="steps">{steps}</ol></section>
