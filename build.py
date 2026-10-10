@@ -82,7 +82,7 @@ ART = {
 <g fill="#e0a43a"><circle cx="100" cy="84" r="4"/><circle cx="78" cy="94" r="3"/><circle cx="122" cy="94" r="3"/></g><g fill="#5a1830"><circle cx="70" cy="126" r="4"/><circle cx="104" cy="122" r="4"/><circle cx="130" cy="132" r="4"/></g>''',
 }
 GALLERY = {
- "panettones-chocottones": [("Chocottone trufado de morango","#ff4d5a"),("Panettone trufado de doce de leite com nozes","#1fae5b"),("Chocottone trufado de Ninho com Nutella","#c2182b")],
+ "panettones-chocottones": [("Recheio trufado de morango","#ff4d5a"),("Decoração natalina","#1fae5b"),("Coberturas que valorizam","#ff7a6b"),("Vitrine de Natal","#c2182b"),("Recheio cremoso","#1fae5b")],
  "brigadeiros-gourmet": [("Sabores variados","#f2d3c4"),("Caixas para presentear e vender","#e6c3cf"),("Cores e texturas","#ead9bf"),("Acabamento de confeitaria","#f0c9d6")],
  "bolachas-biscoitos-natal": [("Biscoitos natalinos","#ff4d5a"),("Kits para presente","#1fae5b"),("Venda na época forte","#ff7a6b")],
  "guirlandas-natal-lucrativas": [("Guirlandas de Natal","#ff4d5a"),("Estilos para cada público","#1fae5b"),("Renda extra","#ff7a6b")],
@@ -110,7 +110,7 @@ def gallery(p):
         photo = next((f'../assets/img/{p["slug"]}-{i}.{e}' for e in ("jpg","webp","png")
                       if os.path.exists(os.path.join(root,"assets","img",f'{p["slug"]}-{i}.{e}'))), None)
         inner = (f'<img src="{photo}" alt="{esc(label)}" loading="lazy">' if photo else
-                 f'<svg viewBox="0 0 200 200" aria-hidden="true" style="transform:rotate({(-6,5,-3,4)[i-1]}deg) scale({(1,1.08,.96,1.02)[i-1]})">{ART[p["art"]]}</svg>')
+                 f'<svg viewBox="0 0 200 200" aria-hidden="true" style="transform:rotate({(-6,5,-3,4,-2)[i-1]}deg) scale({(1,1.08,.96,1.02,1)[i-1]})">{ART[p["art"]]}</svg>')
         tiles += f'<figure class="tile" style="--bg-t:{bg}"><div class="tile-img">{inner}</div><figcaption>{esc(label)}</figcaption></figure>'
     return f'<section class="wrap"><h2>Uma prévia do que você vai criar</h2><div class="gallery n{len(GALLERY[p["slug"]])}">{tiles}</div></section>'
 
