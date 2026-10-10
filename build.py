@@ -65,7 +65,7 @@ ART = {
 }
 GALLERY = {
  "panettones-chocottones": [("Chocottone trufado de morango","#f7c6cf"),("Panettone trufado de doce de leite com nozes","#f0c98a"),("Chocottone trufado de Ninho com Nutella","#e9dcc8")],
- "brigadeiros-gourmet": [("40 receitas","#f2d3c4"),("Sabores gourmet","#e6c3cf"),("Para vender","#ead9bf")],
+ "brigadeiros-gourmet": [("Sabores variados","#f2d3c4"),("Caixas para presentear e vender","#e6c3cf"),("Cores e texturas","#ead9bf"),("Acabamento de confeitaria","#f0c9d6")],
  "bolachas-biscoitos-natal": [("Biscoitos natalinos","#f3d9b5"),("Kits para presente","#f1c9c9"),("Venda na época forte","#e5d3b8")],
  "guirlandas-natal-lucrativas": [("Guirlandas de Natal","#cfe6d4"),("Estilos para cada público","#f3d2d6"),("Renda extra","#dbead9")],
 }
@@ -92,9 +92,9 @@ def gallery(p):
         photo = next((f'../assets/img/{p["slug"]}-{i}.{e}' for e in ("jpg","webp","png")
                       if os.path.exists(os.path.join(root,"assets","img",f'{p["slug"]}-{i}.{e}'))), None)
         inner = (f'<img src="{photo}" alt="{esc(label)}" loading="lazy">' if photo else
-                 f'<svg viewBox="0 0 200 200" aria-hidden="true" style="transform:rotate({(-6,5,-3)[i-1]}deg) scale({(1,1.08,.96)[i-1]})">{ART[p["art"]]}</svg>')
+                 f'<svg viewBox="0 0 200 200" aria-hidden="true" style="transform:rotate({(-6,5,-3,4)[i-1]}deg) scale({(1,1.08,.96,1.02)[i-1]})">{ART[p["art"]]}</svg>')
         tiles += f'<figure class="tile" style="--bg-t:{bg}"><div class="tile-img">{inner}</div><figcaption>{esc(label)}</figcaption></figure>'
-    return f'<section class="wrap"><h2>Uma prévia do que você vai criar</h2><div class="gallery">{tiles}</div></section>'
+    return f'<section class="wrap"><h2>Uma prévia do que você vai criar</h2><div class="gallery n{len(GALLERY[p["slug"]])}">{tiles}</div></section>'
 
 def page(p):
     lis = "".join(f'<li>{CHECK}<span>{esc(b)}</span></li>' for b in p["bullets"])
