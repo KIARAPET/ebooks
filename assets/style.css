@@ -63,3 +63,5 @@ footer{background:var(--ink);color:#c9b9b0;font-size:13px;padding:22px 0;text-al
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 section.wrap,section.band,section.final{padding-block:56px}
+.cover.photo{aspect-ratio:auto;transform:none;width:min(340px,80%);background:#f0f0f0;border-radius:22px;overflow:hidden;filter:none;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.cover.photo img{display:block;width:100%;height:auto}

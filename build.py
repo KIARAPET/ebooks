@@ -68,6 +68,10 @@ CHECK = '<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><cir
 def esc(s): return html.escape(s, quote=True)
 
 def cover(p, big=True):
+    # Capa real: se existir assets/img/<slug>.webp|jpg|png, ela substitui a ilustracao.
+    for ext in ("webp", "jpg", "png"):
+        if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "img", f'{p["slug"]}.{ext}')):
+            return f'<div class="cover photo"><img src="../assets/img/{p["slug"]}.{ext}" alt="Capa do ebook {esc(p["name"])}"></div>'
     # Troque pela capa real: salve assets/img/<slug>.jpg (ou .png) e rode build.py de novo.
     return f'''<div class="cover" role="img" aria-label="Capa do ebook {esc(p["name"])}">
 <div class="book"><div class="spine"></div><div class="face"><span class="tag">E-BOOK</span>
