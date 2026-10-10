@@ -203,12 +203,16 @@ open(os.path.join(root, "index.html"), "w", encoding="utf-8").write(
  f'<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Ebooks</title><div style="max-width:560px;margin:40px auto;padding:0 20px;font-family:system-ui"><h1>Landing pages</h1><ul>{idx}</ul></div>')
 print("ok")
 
-# ---- Pacote de publicacao (GitHub Pages: Settings > Pages > branch main, pasta /docs) ----
-# Cada dominio fica com a propria pagina na raiz. Hoje: brigadeiros em ebookbrigadeirosgourmets.online
+# ---- Pacotes de publicacao (um por dominio; cada um vira a raiz de um site) ----
+# brigadeiros: GitHub Pages deste repo (Settings > Pages > main, pasta /docs)
+# demais: pasta sites/<slug>/ para publicar em um repositorio proprio (1 dominio por repo no GitHub Pages)
 import shutil, glob
-DEPLOY = {"brigadeiros-gourmet": "ebookbrigadeirosgourmets.online"}
-for slug, domain in DEPLOY.items():
-    out = os.path.join(root, "docs")
+DEPLOY = {
+ "brigadeiros-gourmet": ("docs", "ebookbrigadeirosgourmets.online"),
+ "panettones-chocottones": ("sites/panettones-chocottones", "ebookpanettonesechocottones.online"),
+}
+for slug, (folder, domain) in DEPLOY.items():
+    out = os.path.join(root, folder)
     shutil.rmtree(out, ignore_errors=True)
     os.makedirs(os.path.join(out, "assets", "img"))
     h = open(os.path.join(root, slug, "index.html"), encoding="utf-8").read().replace("../assets/", "assets/")
@@ -219,4 +223,4 @@ for slug, domain in DEPLOY.items():
         shutil.copy(f, os.path.join(out, "assets", "img"))
     open(os.path.join(out, "CNAME"), "w").write(domain + "\n")
     open(os.path.join(out, ".nojekyll"), "w").write("")
-print("docs/ pronto para", domain)
+    print(folder, "pronto para", domain)
