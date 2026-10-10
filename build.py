@@ -43,7 +43,7 @@ PRODUCTS = [
   bullets=["Passo a passo para criar guirlandas de Natal","Ideias para diferentes estilos e públicos","Como transformar a produção em renda extra","Conteúdo prático para começar do zero"],
   audience=["Quem quer lucrar no Natal","Quem gosta de trabalhos manuais e decoração","Quem quer um negócio com baixo investimento"]),
  dict(slug="panettones-chocottones", art="panettone", c1="#3d0509", c2="#e8192c", c3="#ff5a4d", snow=True, bg="#0a0506", on="#fff", c4="#1fae5b", name="Panettones & Chocottones Trufados", emoji="🍞",
-  checkout="https://pay.hotmart.com/Q103366986Y", price_from="", price="",
+  checkout="https://pay.hotmart.com/Q103366986Y", pixel="1089445667149332", price_from="", price="",
   headline="Panettones e Chocottones <em>fofinhos, trufados</em> e com cara de confeitaria",
   sub="Massa 100% caseira e recheios simples de preparar: para presentear, enfeitar a ceia ou faturar no fim de ano.",
   bullets=["Massa base de panettone/chocottone feita do zero, sem mistura pronta",
