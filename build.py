@@ -3,7 +3,7 @@
 Edite PIXEL_ID e os dados abaixo e rode: python3 build.py"""
 import os, html
 
-PIXEL_ID = "SEU_PIXEL_ID_AQUI"  # ID do Pixel da Meta (só números)
+PIXEL_ID = "SEU_PIXEL_ID_AQUI"  # Pixel padrao (usado se o produto nao tiver o proprio "pixel")
 
 PRODUCTS = [
  dict(slug="bolachas-biscoitos-natal", art="cookies", c1="#3a0a16", c2="#ff4d6d", c3="#ffc46b", snow=True, name="Bolachas & Biscoitos de Natal", emoji="🍪",
@@ -13,7 +13,7 @@ PRODUCTS = [
   bullets=["Receitas práticas de bolachas e biscoitos natalinos","Passo a passo simples, mesmo para quem está começando","Ideias para montar kits e vender como presente","Aprenda a aproveitar a alta procura da época"],
   audience=["Quem quer uma renda extra no fim de ano","Quem quer surpreender a família na ceia","Quem já vende doces e quer ampliar o cardápio"]),
  dict(slug="brigadeiros-gourmet", art="brigadeiros", c1="#2a0a3a", c2="#ff4fa3", c3="#ffb86b", snow=False, name="Brigadeiros Gourmets: 40 Receitas para Vender", emoji="🍫",
-  checkout="https://pay.hotmart.com/H102991489G", price_from="", price="",
+  checkout="https://pay.hotmart.com/H102991489G", pixel="821711590755929", price_from="", price="",
   headline="Transforme brigadeiros em <em>renda todo mês</em>, direto da sua cozinha",
   sub="Mais de 40 receitas organizadas em linhas de sabores, como uma confeitaria profissional. Mesmo começando do zero.",
   bullets=["Mais de 40 receitas de brigadeiros gourmets em 6 linhas de sabores",
@@ -128,6 +128,7 @@ def page(p):
     if p.get("bonus"):
         bl = "".join(f'<li>{CHECK}<span>{esc(b)}</span></li>' for b in p["bonus"])
         bonus_html = f'<section class="wrap"><h2>{esc(p["bonus_title"])}</h2><ul class="list grid">{bl}</ul></section>'
+    px = p.get("pixel", PIXEL_ID)
     fmt = f'<p class="fmt">{esc(p["format"])}</p>' if p.get("format") else ""
     price = ""
     if p["price"]:
@@ -153,10 +154,10 @@ n.callMethod.apply(n,arguments):n.queue.push(arguments)}};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '{PIXEL_ID}');
+fbq('init', '{px}');
 fbq('track', 'PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={PIXEL_ID}&ev=PageView&noscript=1"/></noscript>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={px}&ev=PageView&noscript=1"/></noscript>
 <!-- End Meta Pixel Code -->
 <script>window.LP={{name:{p["name"]!r},checkout:"{p["checkout"]}",value:0,currency:"BRL"}};</script>
 </head>
