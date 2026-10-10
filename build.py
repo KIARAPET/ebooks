@@ -202,3 +202,21 @@ idx = "".join(f'<li><a href="{p["slug"]}/">{esc(p["name"])}</a></li>' for p in P
 open(os.path.join(root, "index.html"), "w", encoding="utf-8").write(
  f'<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Ebooks</title><div style="max-width:560px;margin:40px auto;padding:0 20px;font-family:system-ui"><h1>Landing pages</h1><ul>{idx}</ul></div>')
 print("ok")
+
+# ---- Pacote de publicacao (GitHub Pages: Settings > Pages > branch main, pasta /docs) ----
+# Cada dominio fica com a propria pagina na raiz. Hoje: brigadeiros em ebookbrigadeirosgourmets.online
+import shutil, glob
+DEPLOY = {"brigadeiros-gourmet": "ebookbrigadeirosgourmets.online"}
+for slug, domain in DEPLOY.items():
+    out = os.path.join(root, "docs")
+    shutil.rmtree(out, ignore_errors=True)
+    os.makedirs(os.path.join(out, "assets", "img"))
+    h = open(os.path.join(root, slug, "index.html"), encoding="utf-8").read().replace("../assets/", "assets/")
+    open(os.path.join(out, "index.html"), "w", encoding="utf-8").write(h)
+    for f in ("style.css", "main.js"):
+        shutil.copy(os.path.join(root, "assets", f), os.path.join(out, "assets", f))
+    for f in glob.glob(os.path.join(root, "assets", "img", slug + "*")):
+        shutil.copy(f, os.path.join(out, "assets", "img"))
+    open(os.path.join(out, "CNAME"), "w").write(domain + "\n")
+    open(os.path.join(out, ".nojekyll"), "w").write("")
+print("docs/ pronto para", domain)
