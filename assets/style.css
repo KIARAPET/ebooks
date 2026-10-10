@@ -1,7 +1,7 @@
 :root{--bg:#09060f;--ink:#f4effa;--muted:#a79db8;--line:rgba(255,255,255,.1);--glass:rgba(255,255,255,.05);--c1:#2a0a3a;--c2:#ff4fa3;--c3:#ffb86b;--grad:linear-gradient(100deg,var(--c2),var(--c3))}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:"DM Sans",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;padding-bottom:76px;-webkit-font-smoothing:antialiased}
+body{--grad:linear-gradient(100deg,var(--c2),var(--c3));margin:0;font-family:"DM Sans",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;padding-bottom:76px;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 h1,h2{font-family:Sora,"DM Sans",system-ui,sans-serif;text-wrap:balance;letter-spacing:-.02em}
 h2{font-size:clamp(26px,4.4vw,38px);line-height:1.15;margin:0 0 28px;font-weight:700}
@@ -20,7 +20,7 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;backg
 @keyframes shimmer{50%{background-position:100% 0}}
 .sub{font-size:clamp(17px,2.3vw,20px);color:var(--muted);margin:0 0 28px;max-width:34em}
 .price{margin:0 0 20px}.price s{color:var(--muted);display:block}.price strong{font-size:30px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.cta{position:relative;overflow:hidden;display:inline-block;background:var(--grad);color:#1a0a14;font-weight:800;font-size:18px;padding:18px 34px;border-radius:999px;text-decoration:none;box-shadow:0 12px 40px -6px color-mix(in srgb,var(--c2) 70%,transparent);transition:transform .2s,box-shadow .2s}
+.cta{position:relative;overflow:hidden;display:inline-block;background:var(--grad);color:var(--on,#1a0a14);font-weight:800;font-size:18px;padding:18px 34px;border-radius:999px;text-decoration:none;box-shadow:0 12px 40px -6px color-mix(in srgb,var(--c2) 70%,transparent);transition:transform .2s,box-shadow .2s}
 .cta:hover,.cta:focus-visible{transform:translateY(-2px) scale(1.02);box-shadow:0 18px 50px -6px color-mix(in srgb,var(--c2) 85%,transparent)}
 .cta::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);animation:shine 3.4s ease-in-out infinite}
 @keyframes shine{60%,100%{left:130%}}
@@ -61,11 +61,11 @@ section.wrap,section.band,section.final{padding-block:64px}
 .band .cta{display:block;max-width:420px;margin:0 auto;text-align:center}
 .steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .steps li{display:flex;gap:14px;align-items:flex-start;padding:20px;border-radius:18px;background:var(--glass);border:1px solid var(--line)}
-.steps b{flex:none;width:42px;height:42px;border-radius:50%;background:var(--grad);color:#1a0a14;display:grid;place-items:center;font-family:Sora,sans-serif}
+.steps b{flex:none;width:42px;height:42px;border-radius:50%;background:var(--grad);color:var(--on,#1a0a14);display:grid;place-items:center;font-family:Sora,sans-serif}
 .steps strong{display:block}.steps span{color:var(--muted);font-size:15px}
 .guarantee{display:flex;gap:28px;align-items:center;border-radius:24px;padding:32px;background:linear-gradient(var(--bg),var(--bg)) padding-box,var(--grad) border-box;border:2px solid transparent;box-shadow:0 30px 80px -30px color-mix(in srgb,var(--c2) 60%,transparent)}
 .guarantee h2{margin-bottom:10px;font-size:26px}.guarantee h2::after{display:none}.guarantee p{margin:0;color:var(--muted)}
-.seal{flex:none;width:100px;height:100px;border-radius:50%;background:var(--grad);color:#1a0a14;display:grid;place-content:center;text-align:center;font:800 40px/1 Sora,sans-serif}
+.seal{flex:none;width:100px;height:100px;border-radius:50%;background:var(--grad);color:var(--on,#1a0a14);display:grid;place-content:center;text-align:center;font:800 40px/1 Sora,sans-serif}
 .seal small{font:800 11px DM Sans,sans-serif;letter-spacing:.12em;text-transform:uppercase}
 .narrow{max-width:780px}
 details{border:1px solid var(--line);background:var(--glass);border-radius:16px;padding:16px 20px;margin-bottom:12px}

@@ -6,7 +6,7 @@ import os, html
 PIXEL_ID = "SEU_PIXEL_ID_AQUI"  # Pixel padrao (usado se o produto nao tiver o proprio "pixel")
 
 PRODUCTS = [
- dict(slug="bolachas-biscoitos-natal", art="cookies", c1="#3a0a16", c2="#ff4d6d", c3="#ffc46b", snow=True, name="Bolachas & Biscoitos de Natal", emoji="🍪",
+ dict(slug="bolachas-biscoitos-natal", art="cookies", c1="#3d0509", c2="#e8192c", c3="#ff5a4d", snow=True, bg="#0a0506", on="#fff", name="Bolachas & Biscoitos de Natal", emoji="🍪",
   checkout="https://pay.hotmart.com/D103367264X", price_from="", price="",
   headline="Bolachas e Biscoitos de Natal que encantam na ceia e <em>rendem dinheiro</em> na sua cozinha",
   sub="Receitas passo a passo para você fazer, presentear e vender neste Natal.",
@@ -36,13 +36,13 @@ PRODUCTS = [
          "Ideias de apresentação e embalagens para deixar seus doces com cara de loja"],
   audience=["Quem quer sair do básico e montar um verdadeiro cardápio de confeitaria","Quem quer uma renda todo mês trabalhando em casa, mesmo começando do zero","Quem ama cozinha e quer ouvir: \"meu Deus, que brigadeiro é esse?\""],
   format="Se você quer aumentar seu cardápio e ouvir seus clientes dizendo “meu Deus, que brigadeiro é esse?” e “essa coxinha de morango é perfeita!”, esse e-book foi feito pra você."),
- dict(slug="guirlandas-natal-lucrativas", art="wreath", c1="#06301f", c2="#2ee59d", c3="#ff5a6e", snow=True, name="Guirlandas de Natal Lucrativas", emoji="🎄",
+ dict(slug="guirlandas-natal-lucrativas", art="wreath", c1="#3d0509", c2="#e8192c", c3="#ff5a4d", snow=True, bg="#0a0506", on="#fff", name="Guirlandas de Natal Lucrativas", emoji="🎄",
   checkout="https://pay.hotmart.com/B103367409V", price_from="", price="",
   headline="Guirlandas de Natal <em>lucrativas</em>: faça e venda na época mais forte do ano",
   sub="Aprenda a criar guirlandas lindas que todo mundo quer levar para casa.",
   bullets=["Passo a passo para criar guirlandas de Natal","Ideias para diferentes estilos e públicos","Como transformar a produção em renda extra","Conteúdo prático para começar do zero"],
   audience=["Quem quer lucrar no Natal","Quem gosta de trabalhos manuais e decoração","Quem quer um negócio com baixo investimento"]),
- dict(slug="panettones-chocottones", art="panettone", c1="#2b0a1f", c2="#ffc46b", c3="#ff6fa0", snow=True, name="Panettones & Chocottones Trufados", emoji="🍞",
+ dict(slug="panettones-chocottones", art="panettone", c1="#3d0509", c2="#e8192c", c3="#ff5a4d", snow=True, bg="#0a0506", on="#fff", name="Panettones & Chocottones Trufados", emoji="🍞",
   checkout="https://pay.hotmart.com/Q103366986Y", price_from="", price="",
   headline="Panettones e Chocottones <em>fofinhos, trufados</em> e com cara de confeitaria",
   sub="Massa 100% caseira e recheios simples de preparar: para presentear, enfeitar a ceia ou faturar no fim de ano.",
@@ -82,10 +82,10 @@ ART = {
 <g fill="#e0a43a"><circle cx="100" cy="84" r="4"/><circle cx="78" cy="94" r="3"/><circle cx="122" cy="94" r="3"/></g><g fill="#5a1830"><circle cx="70" cy="126" r="4"/><circle cx="104" cy="122" r="4"/><circle cx="130" cy="132" r="4"/></g>''',
 }
 GALLERY = {
- "panettones-chocottones": [("Chocottone trufado de morango","#f7c6cf"),("Panettone trufado de doce de leite com nozes","#f0c98a"),("Chocottone trufado de Ninho com Nutella","#e9dcc8")],
+ "panettones-chocottones": [("Chocottone trufado de morango","#ff4d5a"),("Panettone trufado de doce de leite com nozes","#ff7a6b"),("Chocottone trufado de Ninho com Nutella","#c2182b")],
  "brigadeiros-gourmet": [("Sabores variados","#f2d3c4"),("Caixas para presentear e vender","#e6c3cf"),("Cores e texturas","#ead9bf"),("Acabamento de confeitaria","#f0c9d6")],
- "bolachas-biscoitos-natal": [("Biscoitos natalinos","#f3d9b5"),("Kits para presente","#f1c9c9"),("Venda na época forte","#e5d3b8")],
- "guirlandas-natal-lucrativas": [("Guirlandas de Natal","#cfe6d4"),("Estilos para cada público","#f3d2d6"),("Renda extra","#dbead9")],
+ "bolachas-biscoitos-natal": [("Biscoitos natalinos","#ff4d5a"),("Kits para presente","#c2182b"),("Venda na época forte","#ff7a6b")],
+ "guirlandas-natal-lucrativas": [("Guirlandas de Natal","#ff4d5a"),("Estilos para cada público","#c2182b"),("Renda extra","#ff7a6b")],
 }
 CHECK = '<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".15"/><path d="M5.5 10.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
@@ -161,7 +161,7 @@ fbq('track', 'PageView');
 <!-- End Meta Pixel Code -->
 <script>window.LP={{name:{p["name"]!r},checkout:"{p["checkout"]}",value:0,currency:"BRL"}};</script>
 </head>
-<body style="--c1:{p["c1"]};--c2:{p["c2"]};--c3:{p["c3"]}">
+<body style="--c1:{p["c1"]};--c2:{p["c2"]};--c3:{p["c3"]};--bg:{p.get("bg","#09060f")};--on:{p.get("on","#1a0a14")}">
 <div class="topbar">{"Especial de Natal · " if p.get("snow") else ""}Receitas para presentear e vender</div>
 <header class="hero">{snow}<i class="orb o1"></i><i class="orb o2"></i><div class="wrap hero-grid">
  <div class="hero-text">
