@@ -25,3 +25,4 @@ summary{font-weight:600;cursor:pointer}
 footer{background:#2a1a14;color:#cbb;font-size:13px;padding:20px 0;text-align:center}
 .sticky{position:fixed;bottom:0;left:0;right:0;background:#fff;padding:10px;text-align:center;box-shadow:0 -4px 12px rgba(0,0,0,.12);z-index:9}
 .sticky .cta{animation:none;width:100%;max-width:420px;padding:13px 16px;font-size:17px}
+.fmt{font-size:18px;text-align:center;background:var(--cream);border-radius:12px;padding:18px}

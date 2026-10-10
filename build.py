@@ -26,10 +26,20 @@ PRODUCTS = [
   audience=["Quem quer lucrar no Natal","Quem gosta de trabalhos manuais e decoração","Quem quer um negócio com baixo investimento"]),
  dict(slug="panettones-chocottones", name="Panettones & Chocottones Trufados", emoji="🍞",
   checkout="https://pay.hotmart.com/Q103366986Y", price_from="", price="",
-  headline="Panettones e Chocottones <em>Trufados</em>: o Natal lucrativo da sua cozinha",
-  sub="Receitas irresistíveis para vender muito no fim de ano.",
-  bullets=["Receitas de panettones e chocottones trufados","Passo a passo detalhado","Recheios e coberturas que valorizam o produto","Ideal para encomendas de Natal"],
-  audience=["Quem quer faturar no Natal","Quem já faz doces e quer um produto de alto valor","Quem quer presentear com algo especial"]),
+  headline="Panettones e Chocottones <em>fofinhos, trufados</em> e com cara de confeitaria",
+  sub="Massa 100% caseira e recheios simples de preparar: para presentear, enfeitar a ceia ou faturar no fim de ano.",
+  bullets=["Massa base de panettone/chocottone feita do zero, sem mistura pronta",
+           "Passo a passo de fermentação, descanso e assamento para não murchar",
+           "Chocottone trufado de morango",
+           "Panettone trufado de doce de leite com nozes",
+           "Chocottone trufado de Ninho com Nutella",
+           "Sugestões de outros sabores para variar seu cardápio",
+           "Dicas de montagem, corte, recheio, cobertura e acabamento",
+           "Ideias de embalagem e apresentação para presentear ou vender"],
+  audience=["Donas de casa que querem uma mesa linda sem depender de produtos caros de mercado",
+            "Iniciantes na confeitaria que querem começar por uma receita campeã de vendas",
+            "Empreendedoras da cozinha que desejam incluir panettones e chocottones trufados no cardápio de Natal"],
+  format="Você recebe 1 mini e-book digital em PDF, organizado, direto ao ponto e pronto para te acompanhar na cozinha. Comece hoje a produzir panettones e chocottones que encantam no olhar, na primeira fatia… e no bolso. 💛🎄"),
 ]
 
 FAQ = [
@@ -45,6 +55,7 @@ def page(p):
     lis = "".join(f"<li>{esc(b)}</li>" for b in p["bullets"])
     aud = "".join(f"<li>{esc(b)}</li>" for b in p["audience"])
     faq = "".join(f"<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>" for q,a in FAQ)
+    fmt = f'<section><p class="fmt">{esc(p["format"])}</p></section>' if p.get("format") else ""
     price = ""
     if p["price"]:
         old = f'<s>De {esc(p["price_from"])}</s>' if p["price_from"] else ""
@@ -88,6 +99,7 @@ fbq('track', 'PageView');
  <section><h2>O que você vai encontrar</h2><ul class="check">{lis}</ul></section>
  <section class="alt"><h2>Para quem é</h2><ul class="check">{aud}</ul>
   <a class="cta" href="{p["checkout"]}" data-cta>Quero começar agora</a></section>
+ {fmt}
  <section class="guarantee"><h2>Garantia de 7 dias</h2>
   <p>Você tem 7 dias para conferir o material. Se não ficar satisfeita(o), é só pedir o reembolso.</p></section>
  <section><h2>Perguntas frequentes</h2>{faq}</section>
